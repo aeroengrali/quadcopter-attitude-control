@@ -32,7 +32,7 @@ ang_ref ──► [ outer P : Kp_ang ] ──► rate_ref ──► [ inner PID 
 | Settling time (2%) | 0.69 s |
 | Overshoot | 1.2 % |
 | Steady-state error | 0.07° |
-| Peak deviation under 0.05 N·m disturbance pulse | 4.07° (recovered < 0.5 s) |
+| Peak deviation under 0.05 N·m disturbance pulse | 4.07° (recovered to <0.5° in 0.80 s) |
 
 ### Figures
 | | |

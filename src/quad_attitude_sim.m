@@ -97,8 +97,12 @@ fprintf('  Rise time (10-90%%):  %.3f s\n', m.rise);
 fprintf('  Settling time (2%%):  %.3f s\n', m.settle);
 fprintf('  Overshoot:           %.2f %%\n', m.overshoot);
 fprintf('  Steady-state error:  %.3f deg\n', m.sserr);
-distpk = max(abs(roll(t>=3.5 & t<4.5) - roll_ref(end)));
-fprintf('  Peak disturbance dev: %.3f deg, recovered < 0.5 s\n', distpk);
+rref = roll_ref(end);
+dwin = t>=3.5; t_d = t(dwin); roll_d = roll(dwin);
+[distpk, ipk] = max(abs(roll_d - rref));
+rec = find(abs(roll_d(ipk:end) - rref) < 0.5, 1, 'first');
+t_recover = t_d(ipk+rec-1) - 3.5;     % time from disturbance onset to <0.5 deg
+fprintf('  Peak disturbance dev: %.3f deg, recovered to <0.5 deg in %.2f s\n', distpk, t_recover);
 
 %% ---------------------------------------------------------------- Plots
 co = [0.85 0.10 0.10; 0.10 0.45 0.85; 0.10 0.65 0.30];
